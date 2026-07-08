@@ -46,6 +46,25 @@ public class TripJournalController : ControllerBase
         _entries.Add(entry);
         return Ok(entry);
     }
+
+    [HttpPut("{id}")]
+    public ActionResult<TripDay> UpdateEntry([FromBody] TripDay entry, int id)
+    {
+        if (entry.Id == id)
+        {
+            var index = _entries.FindIndex(e => e.Id == id);
+            if (index >= 0)
+            {
+                _entries[index] = entry;
+                return Ok(entry);
+            }
+            else
+            {
+                return NotFound();
+            }
+        } else {
+            return BadRequest("Die ID in der URL stimmt nicht mit der ID im Objekt überein.");
+        }
+    }
 }
-      
- 
+

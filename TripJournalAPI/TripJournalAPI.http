@@ -12,3 +12,17 @@ Content-Type: application/json
   "weather": "Stormy",
   "mood": "Excited"
 }
+
+###
+PUT http://localhost:5028/api/TripJournal/2
+Content-Type: application/json
+
+    {
+    "id": 2,
+    "date": "2026-07-08T13:18:48.0355974+02:00",
+    "weather": "Sunny",
+    "temperature": 35,
+    "activities": "Visited Picasso Museum",
+    "notes": "Queues were long, but worth it.",
+    "mood": "hot"
+  }
