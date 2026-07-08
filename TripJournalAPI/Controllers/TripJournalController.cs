@@ -62,8 +62,25 @@ public class TripJournalController : ControllerBase
             {
                 return NotFound();
             }
-        } else {
+        }
+        else
+        {
             return BadRequest("Die ID in der URL stimmt nicht mit der ID im Objekt überein.");
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteEntry(int id)
+    {
+        var index = _entries.FindIndex(e => e.Id == id);
+        if (index >= 0)
+        {
+            _entries.RemoveAt(index);
+            return NoContent();
+        }
+        else
+        {
+            return NotFound("Der Eintrag wurde nicht gefunden.");
         }
     }
 }
