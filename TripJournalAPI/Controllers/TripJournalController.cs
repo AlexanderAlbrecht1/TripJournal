@@ -38,4 +38,14 @@ public class TripJournalController : ControllerBase
         // Ok() sendet HTTP Status 200 zurück mitsamt unserer Liste
         return Ok(_entries);
     }
+
+    [HttpPost]
+    public ActionResult<IEnumerable<TripDay>> AddEntry([FromBody] TripDay entry)
+    {
+        entry.Id = _entries.Any() ? _entries.Max(e => e.Id) + 1 : 1;
+        _entries.Add(entry);
+        return Ok(entry);
+    }
 }
+      
+ 

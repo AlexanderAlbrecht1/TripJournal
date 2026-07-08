@@ -1,9 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace TripJournalAPI.Models;
 
 public class TripDay
 {
    public int Id {get;set; }
-   public DateTime Date{get;set;}
+   
+   [Required(ErrorMessage = "Datum ist erforderlich")]
+   public DateTime? Date{get;set;}
    public string Weather {get;set;} = string.Empty;
    public int Temperature {get;set;}
    public string Activities {get; set;} = string.Empty;
