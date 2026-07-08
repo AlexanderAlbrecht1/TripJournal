@@ -26,9 +26,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # ==========================================
-# Entwicklungsumgebungen & OS (Allgemein)
+# Entwicklungsumgebungen & OS
 # ==========================================
-# VS Code Einstellungen (falls du sie nicht teilen willst)
+# VS Code Einstellungen
 **/.vscode/
 **/.gemini/
 
