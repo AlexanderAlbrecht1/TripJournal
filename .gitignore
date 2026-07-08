@@ -1,0 +1,37 @@
+# ==========================================
+# .NET / C# (Backend)
+# ==========================================
+# Temporäre Build- und Kompilierungsordner
+**/bin/
+**/obj/
+
+# Lokale User-Einstellungen von Visual Studio / Rider
+**.user
+**.userosscache
+**.sln.docstates
+
+# ==========================================
+# Node / Angular (Frontend)
+# ==========================================
+# Externe Abhängigkeiten (niemals committen!)
+**/node_modules/
+
+# Build-Ausgabeordner von Angular
+**/dist/
+**/.angular/
+
+# Lokale Log-Dateien bei Fehlern
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==========================================
+# Entwicklungsumgebungen & OS (Allgemein)
+# ==========================================
+# VS Code Einstellungen (falls du sie nicht teilen willst)
+**/.vscode/
+**/.gemini/
+
+# Betriebssystem-Spezifisches
+.DS_Store
+Thumbs.db
