@@ -10,6 +10,11 @@
 **.userosscache
 **.sln.docstates
 
+# Database
+*.db
+*.db-wal
+*.db-shm
+
 # ==========================================
 # Node / Angular (Frontend)
 # ==========================================

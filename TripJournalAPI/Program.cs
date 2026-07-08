@@ -1,9 +1,15 @@
 using Scalar.AspNetCore;
+using Microsoft.EntityFrameworkCore;
+using TripJournalAPI.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<JournalContext>(options =>
+    options.UseSqlite("Data Source=tripjournal.db"));
+    
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
