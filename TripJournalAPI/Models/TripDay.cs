@@ -13,4 +13,6 @@ public class TripDay
    public string Activities {get; set;} = string.Empty;
    public string Notes {get; set;} = string.Empty;
    public string Mood {get; set;} = string.Empty;   
+   public int TripId { get; set; }
+   public Trip? Trip { get; set; }
 }

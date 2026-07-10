@@ -8,6 +8,6 @@ public class JournalContext : DbContext
     public JournalContext(DbContextOptions<JournalContext> options) : base(options)
     {
     }
-
+    public DbSet<Trip> Trips { get; set; }
     public DbSet<TripDay> TripDays { get; set; }
 }

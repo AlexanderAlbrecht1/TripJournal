@@ -8,12 +8,13 @@ POST http://localhost:5028/api/TripJournal
 Content-Type: application/json
 
 {
-  "date": "2026-07-10T00:00:00",
+  "tripId": 2, 
+  "date": "2026-07-11T00:00:00",
   "weather": "Sunny",
-  "temperature": 28,
-  "activities": "Klonen erfolgreich abgeschlossen, Datenbank läuft!",
-  "notes": "Erster echter DB Eintrag auf dem neuen Rechner.",
-  "mood": "Relieved"
+  "temperature": 25,
+  "activities": "Relationale Datenbanken verstanden!",
+  "notes": "Die Verknüpfung über den Foreign Key funktioniert.",
+  "mood": "Proud"
 }
 
 ###
@@ -32,3 +33,16 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:5028/api/TripJournal/1
+
+###
+GET http://localhost:5028/api/Trips
+Accept: application/json
+
+###
+POST http://localhost:5028/api/Trips
+Content-Type: application/json
+
+{
+  "Title": "Test 2026",
+  "Description": "Test Trip"
+}

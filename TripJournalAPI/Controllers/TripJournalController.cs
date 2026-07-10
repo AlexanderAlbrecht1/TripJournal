@@ -8,7 +8,7 @@ namespace TripJournalAPI.Controllers;
 [Route("api/[controller]")]
 public class TripJournalController : ControllerBase
 
-    
+
 {
     private readonly JournalContext _context;
 
@@ -17,43 +17,25 @@ public class TripJournalController : ControllerBase
         _context = context;
     }
 
-    // Wir erstellen eine feste Liste im Speicher für den ersten Test
-    private static readonly List<TripDay> _entries = new List<TripDay>
-    {
-        new TripDay
-        {
-            Id = 1,
-            Date = DateTime.Now.AddDays(-1),
-            Weather = "Sunny",
-            Temperature = 25,
-            Activities = "Sightseeing in Barcelona",
-            Notes = "Found a beautiful small cafe.",
-            Mood = "Happy"
-        },
-        new TripDay
-        {
-            Id = 2,
-            Date = DateTime.Now,
-            Weather = "Rainy",
-            Temperature = 18,
-            Activities = "Visited Picasso Museum",
-            Notes = "Queues were long, but worth it.",
-            Mood = "Tired but inspired"
-        }
-    };
-
     [HttpGet]
     public ActionResult<IEnumerable<TripDay>> GetAllEntries()
     {
         // Ok() sendet HTTP Status 200 zurück mitsamt unserer Liste
-        return Ok(_context.TripDays.ToList() );
+        return Ok(_context.TripDays.ToList());
     }
 
     [HttpPost]
     public ActionResult<TripDay> AddEntry([FromBody] TripDay entry)
     {
+        var tripExists = _context.Trips.Any(t => t.Id == entry.TripId);
+        if (!tripExists)
+        {
+            return BadRequest($"Fehler: Ein Trip mit der ID {entry.TripId} existiert nicht.");
+        }
+
         _context.TripDays.Add(entry);
         _context.SaveChanges();
+
         return Ok(entry);
     }
 
