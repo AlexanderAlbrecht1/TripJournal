@@ -1,12 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
 using TripJournalAPI.Models;
+using TripJournalAPI.Data;
 
 namespace TripJournalAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class TripJournalController : ControllerBase
+
+    
 {
+    private readonly JournalContext _context;
+
+    public TripJournalController(JournalContext context)
+    {
+        _context = context;
+    }
+
     // Wir erstellen eine feste Liste im Speicher für den ersten Test
     private static readonly List<TripDay> _entries = new List<TripDay>
     {
@@ -36,14 +46,14 @@ public class TripJournalController : ControllerBase
     public ActionResult<IEnumerable<TripDay>> GetAllEntries()
     {
         // Ok() sendet HTTP Status 200 zurück mitsamt unserer Liste
-        return Ok(_entries);
+        return Ok(_context.TripDays.ToList() );
     }
 
     [HttpPost]
-    public ActionResult<IEnumerable<TripDay>> AddEntry([FromBody] TripDay entry)
+    public ActionResult<TripDay> AddEntry([FromBody] TripDay entry)
     {
-        entry.Id = _entries.Any() ? _entries.Max(e => e.Id) + 1 : 1;
-        _entries.Add(entry);
+        _context.TripDays.Add(entry);
+        _context.SaveChanges();
         return Ok(entry);
     }
 
@@ -52,11 +62,18 @@ public class TripJournalController : ControllerBase
     {
         if (entry.Id == id)
         {
-            var index = _entries.FindIndex(e => e.Id == id);
-            if (index >= 0)
+            var existingEntry = _context.TripDays.Find(id);
+            if (existingEntry != null)
             {
-                _entries[index] = entry;
-                return Ok(entry);
+                existingEntry.Date = entry.Date;
+                existingEntry.Weather = entry.Weather;
+                existingEntry.Temperature = entry.Temperature;
+                existingEntry.Activities = entry.Activities;
+                existingEntry.Notes = entry.Notes;
+                existingEntry.Mood = entry.Mood;
+
+                _context.SaveChanges();
+                return Ok(existingEntry);
             }
             else
             {
@@ -72,10 +89,11 @@ public class TripJournalController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeleteEntry(int id)
     {
-        var index = _entries.FindIndex(e => e.Id == id);
-        if (index >= 0)
+        var entry = _context.TripDays.Find(id);
+        if (entry != null)
         {
-            _entries.RemoveAt(index);
+            _context.TripDays.Remove(entry);
+            _context.SaveChanges();
             return NoContent();
         }
         else

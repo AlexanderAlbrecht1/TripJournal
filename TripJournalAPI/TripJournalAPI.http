@@ -8,9 +8,12 @@ POST http://localhost:5028/api/TripJournal
 Content-Type: application/json
 
 {
-    "date": "2026-07-08T13:12:00",
-  "weather": "Windy",
-  "mood": "Excited"
+  "date": "2026-07-10T00:00:00",
+  "weather": "Sunny",
+  "temperature": 28,
+  "activities": "Klonen erfolgreich abgeschlossen, Datenbank läuft!",
+  "notes": "Erster echter DB Eintrag auf dem neuen Rechner.",
+  "mood": "Relieved"
 }
 
 ###
@@ -28,4 +31,4 @@ Content-Type: application/json
   }
 
 ###
-DELETE http://localhost:5028/api/TripJournal/2
+DELETE http://localhost:5028/api/TripJournal/1
