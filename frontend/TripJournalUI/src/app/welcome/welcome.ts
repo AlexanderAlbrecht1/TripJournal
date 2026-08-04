@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'app-welcome',
-  imports: [CardModule, ButtonModule],
+  imports: [MatCardModule, MatButtonModule],
   templateUrl: './welcome.html',
   styleUrl: './welcome.scss',
 })
